@@ -1,7 +1,8 @@
 pipeline {
     
  
-    try {
+    stages{
+	   try {
         
         stage ('Tests') {
 	        parallel 'static': {
@@ -22,5 +23,5 @@ pipeline {
         currentBuild.result = 'FAILED'
         throw err
     }
-   
+   }
  }
