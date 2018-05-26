@@ -2,7 +2,7 @@ pipeline {
     
  agent any
     stages{
-	   try {
+	    {
         
         stage ('Tests') {
 	        parallel 'static': {
@@ -19,9 +19,6 @@ pipeline {
             sh "python helloworld.py"
 			
       	}
-    } catch (err) {
-        currentBuild.result = 'FAILED'
-        throw err
-    }
+    } 
    }
  }
