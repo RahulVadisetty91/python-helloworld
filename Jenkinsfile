@@ -1,8 +1,6 @@
 pipeline {
-    node {
- 	// Clean workspace before doing anything
-    deleteDir()
-
+    
+ 
     try {
         
         stage ('Tests') {
@@ -24,5 +22,5 @@ pipeline {
         currentBuild.result = 'FAILED'
         throw err
     }
-}
+   
  }
