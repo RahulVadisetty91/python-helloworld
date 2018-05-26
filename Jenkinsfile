@@ -4,19 +4,16 @@ pipeline {
     stages{
         
         stage ('Tests') {
-	        parallel 'static': {
-	            sh "echo 'shell scripts to run static tests...'"
-	        },
-	        'unit': {
-	            sh "echo 'shell scripts to run unit tests...'"
-	        },
-	        'integration': {
-	            sh "echo 'shell scripts to run integration tests...'"
-	        }
+		steps {
+			parallel ( "unit tests": { sh 'echo  "mvn test"' },
+                    "integration tests": { sh 'echo "mvn integration-test"' }
+                )
         }
+	}
       	stage ('Deploy') {
-            sh "python helloworld.py"
-			
+		steps {
+            		sh "python helloworld.py"
+		}
       	}
     } 
  
