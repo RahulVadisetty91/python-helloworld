@@ -2,7 +2,6 @@ pipeline {
     
  agent any
     stages{
-	    {
         
         stage ('Tests') {
 	        parallel 'static': {
@@ -20,5 +19,5 @@ pipeline {
 			
       	}
     } 
-   }
+ 
  }
