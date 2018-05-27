@@ -17,7 +17,7 @@ pipeline {
       	}
 	stage ('artifact') {
 		steps {
-            		sh "tar -xf code_holder.tgz -C code_holder"
+            		sh "tar -zcvf code_holder.tar.gz code_holder"
 		}
       	}    
     } 
