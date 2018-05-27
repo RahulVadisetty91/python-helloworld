@@ -2,6 +2,11 @@ pipeline {
     
  agent any
     stages{
+	    stage ('Init') {
+		    script {
+			    env.CREDENTIALS = 'Azure_Prod_SPN'
+		    }
+	    }
         
         stage ('Tests') {
 		steps {
@@ -23,8 +28,13 @@ pipeline {
      } 
   post { 
         success { 
-            echo 'Tring to upload artifactory'
-            azureUpload storageCredentialId: 'azurestorageaccount', storageType: 'blobstorage', containerName: 'pythondatabricks', filesPath: 'code_holder.tar.gz', virtualPath: '${BUILD_ID}/${BUILD_NUMBER}'
+            echo 'Tring to upload artifact'
+	    withCredentials([azureServicePrincipal(env.CREDENTIALS)]) {
+            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+            sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
+            sh 'az show account'
+        }
+            //azureUpload storageCredentialId: 'azurestorageaccount', storageType: 'blobstorage', containerName: 'pythondatabricks', filesPath: 'code_holder.tar.gz', virtualPath: '${BUILD_ID}/${BUILD_NUMBER}'
         }
 		
        }   
