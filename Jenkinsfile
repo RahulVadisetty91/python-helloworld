@@ -2,11 +2,7 @@ pipeline {
     
  agent any
     stages{
-	    stage ('Init') {
-		    script {
-			    env.CREDENTIALS = 'Azure_Prod_SPN'
-		    }
-	    }
+	    
         
         stage ('Tests') {
 		steps {
@@ -29,6 +25,7 @@ pipeline {
   post { 
         success { 
             echo 'Tring to upload artifact'
+	    env.CREDENTIALS = 'Azure_Prod_SPN'	
 	    withCredentials([azureServicePrincipal(env.CREDENTIALS)]) {
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
             sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
