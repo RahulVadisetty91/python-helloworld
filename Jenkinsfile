@@ -12,9 +12,14 @@ pipeline {
 	}
       	stage ('Deploy') {
 		steps {
-            		sh "python helloworld.py"
+            		sh "python code_holder/helloworld.py"
 		}
       	}
+	stage ('artifact') {
+		steps {
+            		sh "tar -xf code_holder.tgz -C /code_holder"
+		}
+      	}    
     } 
  
  }
