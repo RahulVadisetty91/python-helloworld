@@ -24,7 +24,7 @@ pipeline {
   post { 
         success { 
             echo 'Tring to upload artifactory'
-            azureUpload storageCredentialId: 'azurestorageaccount', storageType: 'blobstorage', containerName: 'pythondatabricks', filesPath: 'code_holder.tar.gz', virtualPath: '$BUILD_ID/$BUILD_NUMBER/code_holder'
+            azureUpload storageCredentialId: 'azurestorageaccount', storageType: 'blobstorage', containerName: 'pythondatabricks', filesPath: 'code_holder.tar.gz', virtualPath: '$BUILD_ID/$BUILD_NUMBER'
         }
 		
        }   
