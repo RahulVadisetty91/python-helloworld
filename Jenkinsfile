@@ -20,14 +20,12 @@ pipeline {
             		sh "tar -zcvf code_holder.tar.gz code_holder"
 		}
       	}  
-        post { 
+     } 
+  post { 
         success { 
             echo 'Tring to upload artifactory'
             azureUpload storageCredentialId: 'azurestorageaccount', storageType: 'blobstorage', containerName: 'pythondatabricks', filesPath: '$BUILD_ID/$BUILD_NUMBER/code_holder.tar.gz', virtualPath: ''
         }
 		
        }   
-	
-    } 
- 
  }
