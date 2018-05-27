@@ -25,8 +25,7 @@ pipeline {
   post { 
         success { 
             echo 'Tring to upload artifact'
-	    env.CREDENTIALS = 'Azure_Prod_SPN'	
-	    withCredentials([azureServicePrincipal(env.CREDENTIALS)]) {
+	    withCredentials([azureServicePrincipal('Azure_Prod_SPN')]) {
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
             sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
             sh 'az show account'
