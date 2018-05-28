@@ -29,6 +29,7 @@ pipeline {
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
             sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
             sh 'az account show'
+            sh 'storage blob upload -f code_holder.tar.gz -c pyhtondatabricks -n azurestorageaccount
         }
             //azureUpload storageCredentialId: 'azurestorageaccount', storageType: 'blobstorage', containerName: 'pythondatabricks', filesPath: 'code_holder.tar.gz', virtualPath: '${BUILD_ID}/${BUILD_NUMBER}'
         }
