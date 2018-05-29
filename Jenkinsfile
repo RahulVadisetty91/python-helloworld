@@ -29,8 +29,7 @@ pipeline {
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
             sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
             sh 'az account show'
-            sh 'az storage account keys list --resource-group DAP-DEV-rahul-test --account-name pythondatabricks -o table | grep \'key1\' | awk -F " " \'{print $3}\''
-	'		    
+            sh 'az storage account keys list --resource-group DAP-DEV-rahul-test --account-name pythondatabricks -o table | grep \'key1\' | awk -F " " \'{print $3}\''		    
  	    //sh  'az storage blob upload --container-name pythondatabricks --type page --file code_holder.tar.gz --name code_holder.tar.gz'
         }
             //azureUpload storageCredentialId: 'azurestorageaccount', storageType: 'blobstorage', containerName: 'pythondatabricks', filesPath: 'code_holder.tar.gz', virtualPath: '${BUILD_ID}/${BUILD_NUMBER}'
